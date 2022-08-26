@@ -2,7 +2,7 @@
 - name: (create) try to get public ssh keys from gitlab
   block:
     - name: (create) get public ssh keys from gitlab
-      uri:
+      ansible.builtin.uri:
         url: "{{ takel_users_gitlab_url }}{{ gitlab_user }}.keys"
         status_code:
           - 200
@@ -18,7 +18,7 @@
         loop_var: gitlab_user
 
     - name: (create) try to create user/sshpubkey dict from gitlab query
-      set_fact:
+      ansible.builtin.set_fact:
         takel_users_sshpubkeys_default: >-
           {{ takel_users_sshpubkeys_default | default({}) |
           combine({default_user.gitlab_user: default_user.content.split('\n') |
@@ -29,7 +29,7 @@
 
   rescue:
     - name: (create) rescue by creating custom user/sshpubkey dict
-      set_fact:
+      ansible.builtin.set_fact:
         takel_users_sshpubkeys_custom: >-
           {{ takel_users_sshpubkeys_custom | default({}) |
           combine({custom_user: takel_users_userdata[custom_user].ssh |
@@ -39,7 +39,7 @@
         loop_var: custom_user
 
 - name: (create) create user/sshpubkey dict (default wins over custom)
-  include: ssh.yml
+  ansible.builtin.include_tasks: ssh.yml
   vars:
     user: "{{ ssh_user }}"
     ssh_default: >-
@@ -52,7 +52,7 @@
     loop_var: ssh_user
 
 - name: (create) create user/passwords dict
-  include: passwords.yml
+  ansible.builtin.include_tasks: passwords.yml
   vars:
     user: "{{ password_user }}"
     password_hash: >-
@@ -62,7 +62,7 @@
     loop_var: password_user
 
 - name: (create) create user accounts
-  include_role:
+  ansible.builtin.include_role:
     name: takel_user
   vars:
     takel_user_name: "{{ user }}"

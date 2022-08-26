@@ -2,7 +2,7 @@
 - name: >-
     (ssh) add user {{ user }} to custom user/sshpubkeys dict
     with custom ssh keys
-  set_fact:
+  ansible.builtin.set_fact:
     takel_users_sshpubkeys: >-
       {{ takel_users_sshpubkeys |
       default({}) |
@@ -12,7 +12,7 @@
 - name: >-
     (ssh) add user {{ user }} to default user/sshpubkeys dict
     with default ssh keys
-  set_fact:
+  ansible.builtin.set_fact:
     takel_users_sshpubkeys: >-
       {{ takel_users_sshpubkeys |
       default({}) |
@@ -25,7 +25,7 @@
 - name: >-
     (ssh) add user {{ user }} to default user/sshpubkeys dict
     with empty ssh keys
-  set_fact:
+  ansible.builtin.set_fact:
     takel_users_sshpubkeys: >-
       {{ takel_users_sshpubkeys |
       default({}) |

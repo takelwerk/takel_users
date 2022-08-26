@@ -1,20 +1,20 @@
 ---
 - name: (main) include install
-  import_tasks: install.yml
+  ansible.builtin.import_tasks: install.yml
   tags:
     - takel
     - takel_users
     - takel_users_install
 
 - name: (main) include root
-  import_tasks: root.yml
+  ansible.builtin.import_tasks: root.yml
   tags:
     - takel
     - takel_users
     - takel_users_root
 
 - name: (main) include create
-  import_tasks: create.yml
+  ansible.builtin.import_tasks: create.yml
   tags:
     - takel
     - takel_users
