@@ -2,4 +2,4 @@
 - name: default
   hosts: molecule
   roles:
-    - takel-users
+    - takel_users
