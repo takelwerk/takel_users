@@ -1,11 +1,6 @@
 ---
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  ansible-lint molecule/*/*.yml
-  flake8
 platforms:
   - name: molecule-takel-users
     image: takelage/takelbase
@@ -62,7 +57,6 @@ scenario:
   destroy_sequence:
     - destroy
   test_sequence:
-    - lint
     - destroy
     - syntax
     - create
